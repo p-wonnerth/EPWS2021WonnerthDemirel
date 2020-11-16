@@ -16,3 +16,6 @@ Des Weiteren soll durch den Kauf von nachhaltigen Fischprodukten zur naturvertr�
 Durch das Projekt soll die Aufmerksamkeit des Verbrauchers mehr auf seine Umwelt und Mitmenschen gelenkt werden, somit weist es eine sehr hohe gesellschaftliche als auch wirtschaftlichen Relevanz auf, denn es wird strengstens darauf aufmerksam gemacht, dass sich in der heutigen Gesellschaft hinsichtlich des Klimawandels und unserer Umwelt etwas ver채ndern muss.
 Zus채tzlich weist das Projekt auch eine hohe wissenschaftlich Relevanz auf, da es sich f체r den Schutz verschiedenster Tierarten einsetzt und auch die verschiedensten Lebensr채ume zu sch체tzen versucht, sodass noch nicht entdeckte Tierarten nicht vor ihrer Entdeckung aussterben.
 
+### Dom채nenmodell
+
+![](Artefakte/Dom채nenmodell.jpg)
