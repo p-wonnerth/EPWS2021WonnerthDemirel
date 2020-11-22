@@ -17,7 +17,7 @@ Durch das Projekt soll die Aufmerksamkeit des Verbrauchers mehr auf seine Umwelt
 Zusätzlich weist das Projekt auch eine hohe wissenschaftlich Relevanz auf, da es sich für den Schutz verschiedenster Tierarten einsetzt und auch die verschiedensten Lebensräume zu schützen versucht, sodass noch nicht entdeckte Tierarten nicht vor ihrer Entdeckung aussterben.
 
 ### Anwendungslogik
-Das System bezieht Produktinformation von einer API und soll diese nach Bioprodukten bzw. nachhaltigen Produkten filtern und einen prozentualen Teil des Einkaufwertes berechnen, ähnlich wie bei einem Paybacksystem. Des Weiteren soll der User die Wahl haben wen und was er mit seinem prozentualen Teil unterstützen will (beispielsweise Amazonas in Brasilien oder Waldbrände in Australien). Der berechnete prozentuale Wert des Einkaufs wird an den Server geschickt, um das Geld zu verwalten und zu berechnen, wo und wie viele Bäume bereits gepflanzt wurden. So soll der User stetig einsehen können wie viel er zu den verschiedenen Projekten beigetragen hat.
+Das System bezieht Produktinformationen von einer API und soll diese nach Bioprodukten bzw. nachhaltigen Produkten filtern und einen prozentualen Teil des Einkaufwertes berechnen, ähnlich wie bei einem Paybacksystem. Des Weiteren soll der User die Wahl haben, wen und was er mit seinem prozentualen Teil unterstützen will (beispielsweise Amazonas in Brasilien oder Waldbrände in Australien). Der berechnete prozentuale Wert des Einkaufs wird an den Server geschickt, um das Geld zu verwalten und zu berechnen, wo und wie viele Bäume bereits gepflanzt wurden. So soll der User stetig einsehen können wie viel er zu den verschiedenen Projekten beigetragen hat.
 
 ### Domänenmodell
 
