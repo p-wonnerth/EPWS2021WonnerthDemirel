@@ -21,37 +21,19 @@ router.get('/', (req, res) => {
                 const res = await fetch(`https://de.openfoodfacts.org/api/v0/product/` + barcode[u] + `.json`)
                 const fetchData = await res.json()
 
+                const siegel = new Array('Demeter', 'Bioland', 'Naturland')
+                
                 if (fetchData.status == 1) {
-
-                    const siegel = new Array('Demeter', 'Bioland', 'Naturland')
-
-
-                    for (i = 0; i < siegel.length;) {
-                        if (fetchData.product.labels.match('Hergestellt in Deutschland')) {
-                            if (fetchData.product.labels.match(siegel[i])) {
-                                console.log(fetchData.product.product_name_de + ' der Marke ' + fetchData.product.brands + ' ist nachhaltig, kommt aus Deutschland und wurde hinzugefügt.')
-                                break
-                            }
-                            if (fetchData.product.labels != siegel[i]) {
-                                i++;
-                            }
-                            if (i == siegel.length && fetchData.product.labels != siegel[i]) {
-                                console.log(fetchData.product.product_name_de + ' der Marke ' + fetchData.product.brands + ' kommt aus Deutschland, ist aber nicht nachhaltig.')
-                                break
-                            }
-                        }
-                        else {
-                            console.log(fetchData.product.product_name_de + ' der Marke ' + fetchData.product.brands + ' kommt nicht aus Deutschland.')
-                            break
-                        }
-
+                    if (fetchData.product.labels.match('Hergestellt in Deutschland')) {
+                        checkBioSiegel(siegel, fetchData);
+                    }
+                    if ( !fetchData.product.labels.match('Hergestellt in Deutschland')) {
+                        console.log(fetchData.product.product_name_de + ' der Marke ' + fetchData.product.brands + ' kommt nicht aus Deutschland.')
                     }
                 }
-
-                if (fetchData.status == 0) {
-                    console.log('Produkt nicht gefunden')
+                else {
+                    console.log('Produkt wurde nicht gefunden!')
                 }
-
             }
             catch (error) {
                 console.log(error);
@@ -60,5 +42,21 @@ router.get('/', (req, res) => {
         getData();
     }
 })
+
+function checkBioSiegel(array, json) {
+    for (i=0;i<array.length;) {
+        if (json.product.labels.match(array[i])) {
+        console.log(json.product.product_name_de + ' der Marke ' + json.product.brands + ' ist nachhaltig, kommt aus Deutschland und wurde hinzugefügt.')
+        break
+        }
+        if (json.product.labels != array[i]) {
+        i++;
+        }
+        if (i==array.length && json.product.labels != array[i]) {
+        console.log(json.product.product_name_de + ' der Marke ' + json.product.brands + ' kommt aus Deutschland, ist aber nicht nachhaltig.')
+        break
+        }
+    } 
+}
 
 module.exports = router;
