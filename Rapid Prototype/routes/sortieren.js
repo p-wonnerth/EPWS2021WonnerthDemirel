@@ -45,5 +45,4 @@ function checkBioSiegel(array, json) {
 }
 
 
-
 module.exports = router

@@ -1,0 +1,26 @@
+
+POST http://localhost:3000/kassenbon
+Content-Type: application/json
+
+{
+    "userId":"1",
+    "barcode": ["4027400069556", "4003160036519", "4010355511447", "7640104959557", "4058172079382", "4001724819509"]
+}
+
+###
+
+GET http://localhost:3000/kassenbon
+
+###
+
+POST http://localhost:3000/kassenbon
+Content-Type: application/json
+
+{
+    "userId": "1",
+    "produkte": ["989128ß45","opjnapngü"]
+}
+
+###
+
+DELETE http://localhost:3000/kassenbon/5ff9b84224676031fc90e1c4
