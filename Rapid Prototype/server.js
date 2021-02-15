@@ -32,7 +32,11 @@ app.use('/sortieren', sortierenRouter)
 const testRouter = require('./routes/test')
 app.use('/test', testRouter)
 
-const kassenbonRouter = require('./routes/kassenbon')
-app.use('/kassenbon', kassenbonRouter)
+//const kassenbonRouter = require('./routes/kassenbon')
+//app.use('/kassenbon', kassenbonRouter)
+
+//test
+const userRouter = require('./routes/user')
+app.use('/user', userRouter)
 
 app.listen(3000, () => console.log('Server gestartet'))

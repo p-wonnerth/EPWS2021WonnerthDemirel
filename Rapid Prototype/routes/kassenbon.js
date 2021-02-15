@@ -89,7 +89,17 @@ function checkBioSiegel(array, json) {
     for (i=0;i<array.length;) {
         if (json.product.labels.match(array[i])) {
             console.log(json.product.product_name_de + ' der Marke ' + json.product.brands + ' ist nachhaltig, kommt aus Deutschland und wurde hinzugefügt.')
-            return json.code
+            //Name etc. holen
+            function getValues() {
+              return [json.product.product_name_de, json.code]
+            }
+
+            const {name , barcode} = getValues()
+            return {name, barcode}
+
+
+
+            //return json.code
         }
         if (json.product.labels != array[i]) {
             i++;
