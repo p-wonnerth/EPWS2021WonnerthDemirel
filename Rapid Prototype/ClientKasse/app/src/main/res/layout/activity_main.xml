@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/scanBtn"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan"
-        android:textSize="15sp"
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        android:scrollbars="vertical"
+        android:visibility="invisible"
+        android:layout_above="@id/scanBtn"
+        android:background="@android:drawable/editbox_background"
         />
+
+
+        <Button
+            android:id="@+id/scanBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Scan"
+            android:textSize="15sp"
+            />
+
 
 </RelativeLayout>

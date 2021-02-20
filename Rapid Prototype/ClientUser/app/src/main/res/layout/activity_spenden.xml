@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Spenden">
+
+    <TextView
+        android:id="@+id/spenden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@android:drawable/editbox_background"
+        android:scrollbars="vertical"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        android:layout_above="@+id/btn_spenden"/>
+
+    <Button
+        android:id="@+id/btn_spenden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="Spenden\n anzeigen"
+        android:textSize="12dp"/>
+
+    <Button
+        android:id="@+id/btn_spende_waehlen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:text="Spende\n wählen"
+        android:textSize="12dp"/>
+
+    <Button
+        android:id="@+id/btn_spendengruppe_berechnen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Spendengruppe\n berechnen"
+        android:textSize="12dp"/>
+
+
+</RelativeLayout>
