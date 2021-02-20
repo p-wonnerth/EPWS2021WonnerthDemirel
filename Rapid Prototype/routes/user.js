@@ -13,24 +13,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', getUser, async(req, res) => {
+router.get('/:userId', getUser, async(req, res) => {
     res.json(res.user)
 })
 
-router.put('/:id', getUser, async (req, res) => {
-
-    try {
-        if(req.body.kassenbons != null) {
-          Array.prototype.push.apply(res.user.kassenbons,req.body.kassenbons)
-        }
-        const updatedUser = await res.user.save()
-        res.json(updatedUser)
-    } catch(err) {
-        res.status(400).json({ message: err.message})
-    }
-})
-
-router.delete('/:id', getUser, async (req, res) => {
+router.delete('/:userId', getUser, async (req, res) => {
     try {
         await res.user.remove()
         res.json({  message: 'User wurde gelöscht' })
@@ -44,7 +31,7 @@ router.delete('/:id', getUser, async (req, res) => {
 async function getUser(req, res, next) {
     let user
     try {
-        user = await User.findOne({userId: req.params.id})
+        user = await User.findOne({userId: req.params.userId})
         if (user == null) {
             return res.status(404).json({ message: 'Kein User gefunden!'})
         }
@@ -56,12 +43,71 @@ async function getUser(req, res, next) {
     next()
 }
 
-router.post('/', async (req, res) => {
+router.post('/', postUser, async (req, res) => {
+  postUser()
+})
+
+async function postUser(req, res, next) {
+
+  try {
+    const user = await User.findOneAndUpdate(
+      {
+        userId: req.body.userId
+      },
+      {
+        userId: req.body.userId
+      },
+      {
+        upsert: true,
+        new: true
+      }
+    )
+    console.log(user)
+    res.status(201).json(user)
+  } catch(err) {
+    console.log(err.code)
+    res.status(400).json({ message: err.message})
+  }
+}
+
+router.put('/:userId/spendenorganisation', async (req, res) => {
+  try {
+      if(req.body.spendenorganisation != null) {
+        console.log("hier")
+        console.log(req.params.userId)
+        console.log(req.body.spendenorganisation)
+
+
+        //var obj = {spendenorganisation:
+
+        //console.log(obj)
+
+        const newUser = await User.findOneAndUpdate(
+          {
+            userId: req.params.userId
+          },
+          {
+            spendenorganisation: req.body.spendenorganisation
+          },
+          {
+            new: true
+          }
+        )
+        res.status(201).json(newUser)
+      }
+  } catch(err) {
+      res.status(400).json({ message: err.message})
+  }
+
+})
+
+router.put('/:userId', async (req, res) => {
 
   async function speicherNachhaltigeProdukte() {
 
       let promises = [];
       let produkte = [];
+
 
       for (var u = 0; u <= req.body.barcode.length; u++) {
 
@@ -71,10 +117,6 @@ router.post('/', async (req, res) => {
                   const fetchData = await res.json()
 
                   const siegel = new Array('Demeter', 'Bioland', 'Naturland')
-
-
-
-
 
                   if (fetchData.status == 1) {
                       if (fetchData.product.labels.match('Hergestellt in Deutschland')) {
@@ -113,17 +155,49 @@ router.post('/', async (req, res) => {
 
   speicherNachhaltigeProdukte().then(async function (produkte) {
       var date = moment().format('DD.MM.YYYY')
-      const user = new User ({
-          userId: req.body.userId,
-          kassenbons: {products: produkte, createdAt: date}
-          })
-           try {
-              const newUser = await user.save()
-              res.status(201).json(newUser)
-          } catch (err) {
-              res.status(400).json({ message: err.message })
+
+
+
+          try {
+              if(req.body.barcode != null) {
+                console.log("hier")
+                console.log(req.params.userId)
+
+
+                gesamtPreis = 0
+                for (i=0;i < produkte.length;i++) {
+                  gesamtPreis += produkte[i].preis
+                }
+
+                function percentage(num, per) {
+                  return (num/100)*per;
+                }
+
+                spende = percentage(gesamtPreis, 5.00).toFixed(2)
+
+                var obj = {products: produkte, createdAt: date, gesamtPreis: gesamtPreis, spende: spende}
+
+                const newUser = await User.findOneAndUpdate(
+                  {
+                    userId: req.params.userId
+                  },
+                  {
+                    $push: {kassenbons: obj}
+                  },
+                  {
+                    upsert: true,
+                    new: true
+                  }
+                )
+                res.status(201).json(newUser)
+              }
+          } catch(err) {
+              res.status(400).json({ message: err.message})
           }
+
   })
+
+
 
   function checkBioSiegel(array, json) {
       for (i=0;i<array.length;) {
@@ -131,7 +205,7 @@ router.post('/', async (req, res) => {
               console.log(json.product.product_name_de + ' der Marke ' + json.product.brands + ' ist nachhaltig, kommt aus Deutschland und wurde hinzugefügt.')
               //Name etc. holen
               function getValues() {
-                return {name: json.product.product_name_de, marke: json.product.brands, Siegel:json.product.labels, barcode: json.code}
+                return {name: json.product.product_name_de, marke: json.product.brands, Siegel:json.product.labels, kategorie: "Getreideprodukte", preis: 3, barcode: json.code}
               }
 
               const produkt = getValues()

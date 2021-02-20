@@ -9,7 +9,8 @@ const url = `mongodb+srv://WonnerthDemirel:demirelwonnerth@produkte.mxh9y.mongod
 const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }
 mongoose.connect(url,connectionParams)
     .then( () => {
